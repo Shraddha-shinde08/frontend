@@ -1,45 +1,104 @@
-.place-order-container {
+.place-order {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.place-order-left, .place-order-right {
+    flex: 1;
+    padding: 20px;
+}
+
+.place-order-left {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.multi-fields {
+    display: flex;
+    gap: 10px;
+}
+
+input {
     width: 100%;
-    max-width: 400px;
-    margin: auto;
-    background: white;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+input:focus {
+    border: 1px solid #ff5733;
+}
+
+.cart-total {
+    background: #f8f8f8;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-.place-order-container h2 {
+.cart-total h2 {
+    font-size: 1.5rem;
     margin-bottom: 15px;
+    color: #333;
 }
 
-.place-order-container label {
-    display: block;
-    text-align: left;
-    margin: 10px 0 5px;
+.cart-total-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    padding: 10px 0;
+    color: #555;
 }
 
-.place-order-container input,
-.place-order-container textarea,
-.place-order-container select {
+hr {
+    border: none;
+    height: 1px;
+    background: #ddd;
+    margin: 10px 0;
+}
+
+button {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.place-order-container button {
-    background: #ff5722;
+    padding: 12px;
+    background: #ff5733;
     color: white;
-    padding: 10px;
-    width: 100%;
+    font-size: 1.2rem;
+    font-weight: bold;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    transition: background 0.3s;
 }
 
-.place-order-container button:hover {
-    background: #e64a19;
+button:hover {
+    background: #e04e29;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .place-order {
+        flex-direction: column;
+    }
+
+    .multi-fields {
+        flex-direction: column;
+    }
 }

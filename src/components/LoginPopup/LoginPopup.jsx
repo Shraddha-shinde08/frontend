@@ -1,106 +1,35 @@
 import React, { useState } from 'react';
 import './LoginPopup.css';
+import { assets } from '../../assets/assets';
 
-const LoginPopup = ({ setShowLogin }) => {
-    const [isSignup, setIsSignup] = useState(false); // Toggle between Login & Signup
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-    });
-    const [error, setError] = useState('');
+const LoginPopup = ({ setShowLogin }) => {  // ✅ Receive setShowLogin as a prop
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!formData.email || !formData.password) {
-            setError('Please fill in all fields.');
-            return;
-        }
-        if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            setError('Invalid email format.');
-            return;
-        }
-        if (isSignup && formData.password !== formData.confirmPassword) {
-            setError('Passwords do not match.');
-            return;
-        }
-
-        if (isSignup) {
-            console.log('Signed up successfully:', formData);
-            alert('Account created successfully!');
-        } else {
-            console.log('Logged in successfully:', formData);
-            alert('Logged in successfully!');
-        }
-
-        setShowLogin(false); // Close popup after successful login/signup
-    };
+    const [currState, setCurrState] = useState("Login");
 
     return (
         <div className="login-popup">
-            <div className="login-popup-content">
-                <button className="close-btn" onClick={() => setShowLogin(false)}>✖</button>
-                <h2>{isSignup ? 'Sign Up' : 'Sign In'}</h2>
-                {error && <p className="error-message">{error}</p>}
-                <form onSubmit={handleSubmit}>
-                    {isSignup && (
-                        <>
-                            <label>Name:</label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                            />
-                        </>
-                    )}
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
+            <form className="login-popup-container">
+                <div className="login-popup-title">
+                    <h2>{currState}</h2>
+                    <img onClick={() => setShowLogin(false)} src={assets.cross_icon} alt="Close" />  {/* ✅ Clicking this closes popup */}
+                </div>
+                <div className="login-popup-inputs">
+                    {currState==="Login"?<></>:<input type="text" placeholder='Your name' required />}
 
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
+                    <input type="email" placeholder='Your email' required />
+                    <input type="password" placeholder='Password' required />
+                </div>
+                <button>{currState ==="Sign up"? "Create account":"Login"}</button>
+                <div className="login-popup-condition">
+                    <input type="checkbox" required />
+                    <p>By continuing, I agree to the terms of use & privacy policy</p>
+                </div>
+                {currState === "Login"
+                 ? <p>Create a new account? <span onClick={() => setCurrState("Sign up")}>Click here</span></p>
+                 : <p>Already have an account? <span onClick={() => setCurrState("Login")}>Login here</span></p>
+                }
 
-                    {isSignup && (
-                        <>
-                            <label>Confirm Password:</label>
-                            <input
-                                type="password"
-                                name="confirmPassword"
-                                value={formData.confirmPassword}
-                                onChange={handleChange}
-                                required
-                            />
-                        </>
-                    )}
-
-                    <button type="submit" className="login-btn">{isSignup ? 'Sign Up' : 'Login'}</button>
-                </form>
-
-                <p className="switch-text">
-                    {isSignup ? 'Already have an account?' : "Don't have an account?"}
-                    <span onClick={() => setIsSignup(!isSignup)}>
-                        {isSignup ? ' Sign In' : ' Sign Up'}
-                    </span>
-                </p>
-            </div>
+            </form>
         </div>
     );
 };

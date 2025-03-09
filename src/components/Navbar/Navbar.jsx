@@ -1,34 +1,35 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import { assets } from '../../assets/assets';
 import LoginPopup from '../LoginPopup/LoginPopup';
+import { StoreContext } from '../../context/StoreContext';
 
-const Navbar = () => {
+const Navbar = ({ setShowLogin }) => {
     const [menu, setMenu] = useState("home");
-    const [showLogin, setShowLogin] = useState(false);
+    const {getTotalCartAmount} = useContext(StoreContext)
     const navigate = useNavigate();
 
     return (
         <>
-            {showLogin && <LoginPopup setShowLogin={setShowLogin} />}
             <div className='navbar'>
-                <img src={assets.logo} alt="Company Logo" className="logo" />
+                <Link to='/'><img src={assets.logo} alt="Company Logo" className="logo" /></Link>
                 <ul className="navbar-menu">
-                    <li onClick={() => setMenu("home") || navigate('/')} className={menu === "home" ? "active" : ""}>Home</li>
-                    <li onClick={() => setMenu("menu")} className={menu === "menu" ? "active" : ""}>Menu</li>
-                    <li onClick={() => setMenu("mobile-app")} className={menu === "mobile-app" ? "active" : ""}>Mobile App</li>
-                    <li onClick={() => setMenu("contact-us")} className={menu === "contact-us" ? "active" : ""}>Contact Us</li>
-                    <li onClick={() => navigate('/add-restaurant')}>Add Restaurant</li> {/* ✅ New Menu Option */}
+                    <Link to='/' onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>Home</Link>
+                    <a href='#explore-menu' onClick={() => setMenu("menu")} className={menu === "menu" ? "active" : ""}>Menu</a>
+                    <a href='#app-download' onClick={() => setMenu("mobile-app")} className={menu === "mobile-app" ? "active" : ""}>Mobile App</a>
+                    <a href='#footer' onClick={() => setMenu("contact-us")} className={menu === "contact-us" ? "active" : ""}>Contact Us</a>
                 </ul>
                 <div className="navbar-right">
                     <img src={assets.search_icon} alt="Search Icon" />
                     <div className="navbar-search-icon">
-                        <img src={assets.basket_icon} alt="Basket Icon" />
-                        <div className="dot"></div>
+                        <Link to='/cart'><img src={assets.basket_icon} alt="Basket Icon" /></Link>
+                        <div className={getTotalCartAmount()===0?"":"dot"}></div>
                     </div>
                     <button onClick={() => setShowLogin(true)}>Sign In</button>
-                    <button onClick={() => navigate('/add-restaurant')}>Add Restaurant</button> {/* ✅ Button for Easy Access */}
+                    <Link to='/add-restaurant'>
+                        <button>Add Restaurant</button>
+                    </Link>
                 </div>
             </div>
         </>

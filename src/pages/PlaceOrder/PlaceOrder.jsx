@@ -1,52 +1,55 @@
-import React, { useState } from 'react';
-import './PlaceOrder.css';
+import React, { useContext } from 'react'
+import './PlaceOrder.css'
+import { StoreContext } from '../../context/StoreContext'
 
 const PlaceOrder = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        address: '',
-        phone: '',
-        paymentMethod: 'cod', // Default: Cash on Delivery
-    });
+    const {getTotalCartAmount} = useContext(StoreContext)
+  return (
+    <form className='place-order'>
+        <div className="place-order-left">
+            <p className="title">Delivery Information </p>
+            <div className="multi-fields">
+                <input type="text" placeholder='First Name'/>
+                <input type="text" placeholder='Last Name'/>
+            </div>
+            <input type="email" placeholder='Email address'/>
+            <input type="text" placeholder='Street'/>
+            <div className="multi-fields">
+                <input type="text" placeholder='City'/>
+                <input type="text" placeholder='State'/>
+            </div>
+            <div className="multi-fields">
+                <input type="text" placeholder='Zip code'/>
+                <input type="text" placeholder='Country'/>
+            </div>
+            <input type="text" placeholder='Phone' />
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Order Placed:', formData);
-        alert('Order placed successfully!');
-    };
-
-    return (
-        <div className="place-order-container">
-            <h2>Place Your Order</h2>
-            <form onSubmit={handleSubmit}>
-                <label>Name:</label>
-                <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-
-                <label>Email:</label>
-                <input type="email" name="email" value={formData.email} onChange={handleChange} required />
-
-                <label>Address:</label>
-                <textarea name="address" value={formData.address} onChange={handleChange} required />
-
-                <label>Phone:</label>
-                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required />
-
-                <label>Payment Method:</label>
-                <select name="paymentMethod" value={formData.paymentMethod} onChange={handleChange}>
-                    <option value="cod">Cash on Delivery</option>
-                    <option value="credit">Credit Card</option>
-                    <option value="paypal">PayPal</option>
-                </select>
-
-                <button type="submit">Place Order</button>
-            </form>
         </div>
-    );
-};
+        <div className="place-order-right">
+        <div className="cart-total">
+                    <h2>Cart Total</h2>
+                    <div>
+                    <div className="cart-total-details">
+                            <p>Subtotal</p>
+                            <p>Rs.{getTotalCartAmount()}</p>
+                        </div>
+                        <hr />
+                        <div className="cart-total-details">
+                            <p>Delivery fee</p>
+                            <p>Rs.{getTotalCartAmount()===0?0:2}</p>
+                        </div>
+                        <hr />
+                        <div className="cart-total-details">
+                            <p>Total</p>
+                            <p>Rs.{getTotalCartAmount()===0?0:getTotalCartAmount()+2}</p>
+                        </div>
+                    </div>
+                    <button>PROCEED TO PAYMENT</button>
+                </div>
 
-export default PlaceOrder;
+        </div>
+    </form>
+  )
+}
+
+export default PlaceOrder
