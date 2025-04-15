@@ -27,9 +27,6 @@ const Navbar = ({ setShowLogin }) => {
                         <div className={getTotalCartAmount()===0?"":"dot"}></div>
                     </div>
                     <button onClick={() => setShowLogin(true)}>Sign In</button>
-                    <Link to='/add-restaurant'>
-                        <button>Add Restaurant</button>
-                    </Link>
                 </div>
             </div>
         </>

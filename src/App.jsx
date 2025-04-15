@@ -5,7 +5,7 @@ import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import Cart from './pages/Cart/Cart';
 import PlaceOrder from './pages/PlaceOrder/PlaceOrder';
-import RestaurantForm from './pages/RestaurantForm/RestaurantForm'; 
+//import RestaurantForm from './pages/RestaurantForm/RestaurantForm'; 
 import LoginPopup from './components/LoginPopup/LoginPopup';
 
 const App = () => {
@@ -20,8 +20,7 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/order' element={<PlaceOrder />} />
-          <Route path='/add-restaurant' element={<RestaurantForm />} /> 
-        </Routes>   
+          </Routes>   
       </div>
       <Footer />
     </>

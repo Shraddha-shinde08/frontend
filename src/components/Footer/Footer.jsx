@@ -9,7 +9,6 @@ const Footer = () => {
         
         {/* Left Section */}
         <div className="footer-content-left">
-          <img src={assets.logo} alt="Company Logo" />
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Et adipisci placeat, vel blanditiis possimus in quisquam 
             aliquid corrupti dicta itaque ipsum explicabo officiis animi tempora debitis cum quia iusto optio.
@@ -37,7 +36,7 @@ const Footer = () => {
           <h2>Get in Touch</h2>
           <ul>
             <li>📞 9511855965</li>
-            <li>📧 tomato@gmail.com</li>
+            <li>📧 shopeefood@gmail.com</li>
           </ul>
         </div>
 
@@ -45,7 +44,7 @@ const Footer = () => {
 
       <hr />
       <p className="footer-copyright">
-        &copy; 2025 Tomato.com - All Rights Reserved
+        &copy; 2025 shopeefood.com - All Rights Reserved
       </p>
     </div>
   );
